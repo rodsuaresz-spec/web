@@ -1,0 +1,144 @@
+/* === Reset & base === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background-color: #ef7674;
+  font-family: sans-serif;
+}
+
+/* === Contenedor centrado === */
+.full-center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === Botón redondo responsivo === */
+.boton {
+  position: relative;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  width: clamp(5rem, 25vw, 10rem);
+  height: clamp(5rem, 25vw, 10rem);
+  border-radius: 50%;
+  background: #ec5766;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+/* Sombra del botón */
+.boton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e76563;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translateY(5px);
+  transition: transform 0.2s;
+}
+
+/* Efecto de presionado */
+.boton:active {
+  transform: translateY(5px);
+}
+.boton:active::before {
+  transform: translateY(0);
+}
+.boton:active i {
+  color: #dd2c2f;
+}
+
+/* Ícono centrado dentro del botón */
+.boton i {
+  font-size: clamp(2rem, 6vw, 4rem);
+  color: #a50104;
+}
+
+/* === Ícono volador === */
+.icono-volador {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: clamp(1rem, 4vw, 2rem);
+  color: #dd2c2f;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) translateY(0);
+  transition: opacity 0.3s;
+}
+
+.icono-volador.animar {
+  animation: volar 1s forwards;
+  opacity: 1;
+}
+
+@keyframes volar {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-150px) scale(1.5);
+  }
+}
+
+/* === Contenedor de mensajes === */
+#mensajes-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 9999;
+}
+
+/* === Mensajes flotantes === */
+.mensaje-flotante {
+  position: fixed;
+  background: rgba(236, 87, 102, 0.9);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  opacity: 0;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: aparecerYDesaparecer 3s forwards;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+@keyframes aparecerYDesaparecer {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-20px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.8);
+  }
+}
